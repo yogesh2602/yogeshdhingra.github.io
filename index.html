@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yogesh Dhingra | Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="tabs">
+        <button class="tab-btn active" onclick="openTab(event, 'intro')">Introduction</button>
+        <button class="tab-btn" onclick="openTab(event, 'notes')">Knowledge Garden</button>
+        <button class="tab-btn" onclick="openTab(event, 'python')">Python Lab</button>
+    </nav>
+
+    <main id="content-area">
+        <section id="intro" class="tab-content active">
+            <h1>Hi, I'm Yogesh 👋</h1>
+            <div class="personal-touch">
+                <p><strong>The "Why":</strong> Bridging mechanical engineering and data science through Python.</p>
+            </div>
+            <div class="currently-container">
+                <div class="currently-card">
+                    <h4>🚀 Current Project</h4>
+                    <p>Building this portfolio & mastering ML pipelines.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="notes" class="tab-content">
+            <h2>Knowledge Garden 🪴</h2>
+            <p>Click a card to explore my technical notes.</p>
+            <div id="knowledge-grid-container" class="knowledge-grid"></div>
+        </section>
+
+        <section id="python" class="tab-content">
+            <h2>Python Lab 🧪</h2>
+            <div id="python-grid" class="knowledge-grid"></div>
+        </section>
+    </main>
+
+    <div id="note-viewer" class="note-viewer" style="display: none;">
+        <div class="viewer-content">
+            <button class="close-viewer" onclick="closeViewer()">✕ Close Garden</button>
+            <div class="viewer-layout">
+                <nav class="viewer-sidebar">
+                    <h3 id="viewer-topic-title">Topic</h3>
+                    <ul id="viewer-note-list"></ul>
+                </nav>
+                <article class="viewer-body">
+                    <div id="viewer-text"></div>
+                </article>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
