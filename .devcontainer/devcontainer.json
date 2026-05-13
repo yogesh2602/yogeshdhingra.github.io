@@ -1,0 +1,12 @@
+{
+  "name": "Quarto & Python Portfolio",
+  "image": "ghcr.io/quarto-dev/quarto-codespaces:latest",
+  "features": {
+    "ghcr.io/devcontainers/features/python:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": ["quarto.quarto", "ms-python.python"]
+    }
+  }
+}
