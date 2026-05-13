@@ -1,0 +1,10 @@
+---
+title: "Projects"
+listing:
+  contents: notebooks
+  type: grid
+  sort: "date desc"
+  categories: true
+---
+
+Welcome to my project gallery. Below are my Jupyter Notebooks rendered natively!

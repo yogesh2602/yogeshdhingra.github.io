@@ -1,0 +1,51 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "Projects",
+    "section": "",
+    "text": "Welcome to my project gallery. Below are my Jupyter Notebooks rendered natively!\n\n\n\n\n\n\n\n\n\n\n\n\nChain Rule for \\(w_2\\)\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Yogesh Dhingra",
+    "section": "",
+    "text": "Welcome to my portfolio!\nI am building a Knowledge Garden to share my work and learnings.\n\nMy Work\nClick here to see my projects"
+  },
+  {
+    "objectID": "notebooks/NN_from_scratch (1).html",
+    "href": "notebooks/NN_from_scratch (1).html",
+    "title": "Yogesh Dhingra",
+    "section": "",
+    "text": "Screenshot 2026-04-04 at 3.53.42 PM.png\nimport numpy as np\nWe can effectively write the Neural Network as: Hidden Layer Neurons (Linear Combination):\nNeuron 1: \\(z_1 = w_{11}x_1 + w_{21}x_2\\)\nNeuron 2: $z_2 = w_{12}x_1 + w_{22}x_2$2.\nMatrix Form Representation:The operations above are equivalent to the following matrix multiplication:\\[\\begin{bmatrix} z_1 \\\\ z_2 \\end{bmatrix} = \\begin{bmatrix} w_{11} & w_{21} \\\\ w_{12} & w_{22} \\end{bmatrix} \\times \\begin{bmatrix} x_1 \\\\ x_2 \\end{bmatrix}\\]Output Calculation (Pre-activation):The sum entering the final node is calculated as:\\[z_{out} = (w_{31} \\cdot \\text{ReLU}(z_1)) + (w_{32} \\cdot \\text{ReLU}(z_2)) + b_{out}\\]Final Output:The final prediction \\(y\\) is obtained by applying the Sigmoid activation:\\[y = \\text{Sigmoid}(z_{out})\\]\n# Activation Functions\ndef sigmoid(x):\n    return 1 / (1 + np.exp(-x))\n\ndef sigmoid_derivative(x):\n    return sigmoid(x) * (1 - sigmoid(x))\n\ndef relu(x):\n    return np.maximum(0, x)\n\ndef relu_derivative(x):\n    return (x &gt; 0).astype(float)\n### Lets write the activation functions\n\ndef sigmoid(x):\n  return 1/(1+np.exp(-x))\n\ndef sigmoid_derivative(x):\n  return sigmoid(x)*(1-sigmoid(x))\n\ndef relu(x):\n  return np.maximum(0,x)\n\ndef relu_derivative(x):\n    return (x &gt; 0).astype(float)\n##Input &gt; 0: Derivative is $1$ (gradient passes through).Input $\\le$ 0: Derivative is $0$ (gradient is blocked).\n## Lets define the NN Class\n\\[\\frac{\\partial Loss}{\\partial z_2} = \\underbrace{\\frac{\\partial Loss}{\\partial a_2}}_{\\text{Loss Gradient}} \\times \\underbrace{\\frac{\\partial a_2}{\\partial z_2}}_{\\text{Sigmoid Derivative}}\\]\\[\\frac{\\partial Loss}{\\partial z_2} = \\left( \\frac{a_2 - y}{a_2(1 - a_2)} \\right) \\times \\left( a_2(1 - a_2) \\right)\\]"
+  },
+  {
+    "objectID": "notebooks/NN_from_scratch (1).html#chain-rule-for-w_2",
+    "href": "notebooks/NN_from_scratch (1).html#chain-rule-for-w_2",
+    "title": "Yogesh Dhingra",
+    "section": "Chain Rule for \\(w_2\\)",
+    "text": "Chain Rule for \\(w_2\\)\n\\[\n\\frac{\\partial \\text{Loss}}{\\partial w_2} =\n\\underbrace{\\frac{\\partial \\text{Loss}}{\\partial a_2}}_{\\text{Loss Gradient}}\n\\cdot\n\\underbrace{\\frac{\\partial a_2}{\\partial z_2}}_{\\text{Sigmoid Derivative}}\n\\cdot\n\\underbrace{\\frac{\\partial z_2}{\\partial w_2}}_{\\text{Hidden Input}}\n\\]"
+  },
+  {
+    "objectID": "notebooks/NN_from_scratch (1).html#plugging-in-the-values",
+    "href": "notebooks/NN_from_scratch (1).html#plugging-in-the-values",
+    "title": "Yogesh Dhingra",
+    "section": "Plugging in the Values",
+    "text": "Plugging in the Values\n\\[\n\\frac{\\partial \\text{Loss}}{\\partial w_2} =\n\\underbrace{\\left( \\frac{a_2 - y}{a_2(1 - a_2)} \\right)}_{\\text{Error}}\n\\cdot\n\\underbrace{\\left( a_2(1 - a_2) \\right)}_{\\text{Sigmoid Slope}}\n\\cdot\n\\underbrace{a_1}_{\\text{The Signal}}\n\\]"
+  },
+  {
+    "objectID": "notebooks/NN_from_scratch (1).html#the-simplification",
+    "href": "notebooks/NN_from_scratch (1).html#the-simplification",
+    "title": "Yogesh Dhingra",
+    "section": "The Simplification",
+    "text": "The Simplification\nThe sigmoid terms cancel out, leaving a clean formula:\n\\[\n\\frac{\\partial \\text{Loss}}{\\partial w_2} = (a_2 - y) \\cdot a_1\n\\]"
+  },
+  {
+    "objectID": "notebooks/NN_from_scratch (1).html#code-correlation",
+    "href": "notebooks/NN_from_scratch (1).html#code-correlation",
+    "title": "Yogesh Dhingra",
+    "section": "Code Correlation",
+    "text": "Code Correlation\n\n\\((a_2 - y)\\) → dz2\n\\(a_1\\) → self.a1\n\n\nclass SimpleNeuralNetwork:\n  def __init__(self,input_size=2,hidden_size=2,learning_rate=0.1,epochs=100):\n    self.w1=np.random.randn(input_size,hidden_size)\n    self.b1 = np.zeros((1, hidden_size))\n    self.w2=np.random.randn(hidden_size,1)\n    self.b2=np.zeros((1,1))\n    self.lr=learning_rate\n    self.epochs=epochs\n\n\n  def forward_pass(self,X):\n    self.z1=np.dot(X,self.w1)+ self.b1\n    self.a1=relu(self.z1)\n    self.z2=np.dot(self.a1,self.w2)+ self.b2\n    self.a2=sigmoid(self.z2)\n    return self.a2\n\n  def compute_loss(self,y_true,y_pred):\n    return -np.mean(y_true*np.log(y_pred+1e-8)+(1-y_true)*np.log(1-y_pred+1e-8))\n\n\n  def backward_pass(self,X,y_true,y_pred):\n    m=X.shape[0] ###computing number of records in X\n    dz2=y_pred-y_true\n    dw2=np.dot(self.a1.T,dz2)/m\n    dz1 = np.dot(dz2, self.w2.T) * relu_derivative(self.z1)\n    dw1 = np.dot(X.T, dz1) / m\n    db1 = np.sum(dz1, axis=0, keepdims=True) / m\n    db2 = np.sum(dz2, axis=0, keepdims=True) / m\n\n    # Update weights and biases\n    self.w2 -= self.lr * dw2\n    self.b2 -= self.lr * db2\n    self.w1 -= self.lr * dw1\n    self.b1 -= self.lr * db1\n\n\n  def fit(self, X, y):\n        self.loss_history = []\n        for i in range(self.epochs):\n            y_pred = self.forward_pass(X)\n            loss = self.compute_loss(y, y_pred)\n            self.loss_history.append(loss)\n            self.backward_pass(X, y, y_pred)\n            if i % 100 == 0:\n                print(f\"Epoch {i}, Loss: {loss:.4f}\")\n\n  def predict(self, X):\n        probs = self.forward_pass(X)\n        return (probs &gt; 0.5).astype(int)\n\n\n\n# Create dataset\nnp.random.seed(0)\nX = np.random.rand(100, 2)\ny = (X[:, 1] &gt; X[:, 0]).astype(int).reshape(-1, 1)  # 1 if y &gt; x else 0\n\n# Initialize and train model\nnn = SimpleNeuralNetwork(epochs=1000)\nnn.fit(X, y)\n\n# Predict on a few points\ntest_points = np.array([[0.2, 0.8], [0.9, 0.1], [0.4, 0.5]])\npredictions = nn.predict(test_points)\nprint(\"Predictions:\", predictions)\n\nEpoch 0, Loss: 0.6452\nEpoch 100, Loss: 0.4378\nEpoch 200, Loss: 0.3089\nEpoch 300, Loss: 0.2341\nEpoch 400, Loss: 0.1883\nEpoch 500, Loss: 0.1579\nEpoch 600, Loss: 0.1368\nEpoch 700, Loss: 0.1212\nEpoch 800, Loss: 0.1092\nEpoch 900, Loss: 0.0996\nPredictions: [[1]\n [0]\n [1]]\n\n\n\n# --- PLOTTING SECTION ---\nimport matplotlib.pyplot as plt\nplt.figure(figsize=(8, 5))\nplt.plot(nn.loss_history, color='royalblue', linewidth=2)\nplt.title('Model Loss Over Epochs', fontsize=14)\nplt.xlabel('Epoch', fontsize=12)\nplt.ylabel('Loss (MSE)', fontsize=12)\nplt.grid(True, linestyle='--', alpha=0.6)\nplt.show()"
+  }
+]

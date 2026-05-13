@@ -1,0 +1,13 @@
+---
+title: "Yogesh Dhingra"
+---
+
+Welcome to my portfolio! 
+
+I am building a **Knowledge Garden** to share my work and learnings.
+
+### My Work
+[Click here to see my projects](about.qmd)
+
+```{=html}
+<script src="script.js"></script>
